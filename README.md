@@ -20,7 +20,7 @@ We use the **AffectNet – YOLO Format** dataset from Kaggle.
 - **Annotation format:** YOLO object detection format (bounding boxes + labels)
 - **Emotion classes:** anger, contempt, disgust, fear, happy, neutral, sad, surprise
 - **Dataset split:** train / validation / test
-- **Dataset size:** < 10 GB
+- **Dataset size:** 264.08 MB
 
 The dataset is already structured for YOLO-based object detection, which minimizes preprocessing
 effort and allows rapid experimentation. This aligns with the course recommendation to choose
