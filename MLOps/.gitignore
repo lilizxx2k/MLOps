@@ -1,0 +1,20 @@
+# Conda / virtual environments
+mlopsenv/
+.venv/
+env/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Profiling output
+*.prof
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
