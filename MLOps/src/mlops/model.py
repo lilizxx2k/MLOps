@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-
 class Model(nn.Module):
     def __init__(self, output_dim: int):
         super().__init__()
@@ -32,8 +31,14 @@ class Model(nn.Module):
         x = self.relu(x)
         x = self.pool(x)
 
-        # Force fixed spatial dimensions
-        x = self.adaptive_pool(x)
+        # Move to CPU for this specific layer if on MPS.
+        device_type = x.device.type
+        if device_type == 'mps':
+            x = x.cpu()
+            x = self.adaptive_pool(x)
+            x = x.to('mps')
+        else:
+            x = self.adaptive_pool(x)
 
         # Flatten
         x = torch.flatten(x, start_dim=1)
@@ -47,7 +52,8 @@ class Model(nn.Module):
         return x
 
 if __name__ == "__main__":
-    model = Model(output_dim=8)  #8 emotional classes
+    # Test for local CPU execution
+    model = Model(output_dim=8)  # 8 emotional classes
     x = torch.rand(1, 3, 224, 224)
     y = model(x)
     print("Output shape:", y.shape)
