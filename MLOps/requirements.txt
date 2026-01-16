@@ -6,3 +6,4 @@ torchvision
 loguru
 Pillow
 kaggle
+wandb
