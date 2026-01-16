@@ -37,3 +37,6 @@ wandb/
 
 # Logs
 *.log
+
+# API keys
+.env

@@ -6,3 +6,5 @@ torchvision
 loguru
 Pillow
 kaggle
+wandb
+python-dotenv
