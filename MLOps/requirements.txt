@@ -8,3 +8,4 @@ Pillow
 kaggle
 wandb
 python-dotenv
+fastapi
