@@ -101,7 +101,37 @@ The directory structure of the project looks like this:
 └── tasks.py                  # Project tasks
 ```
 
-
 Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
 started with Machine Learning Operations (MLOps).
+
+## API Usage
+This project provides a REST API for classifying emotions from images using a deep learning model (PyTorch). The service is containerized with Docker and deployed to **Google Cloud Run**.
+
+## Live Deployment
+
+The API is live and can be accessed at the following endpoint:
+- **Base URL:** [https://mlops-api-1041024007691.us-central1.run.app](https://mlops-api-1041024007691.us-central1.run.app)
+
+### Interactive API Documentation
+FastAPI automatically generates interactive documentation. You can test the API directly from your browser without writing any code:
+- **Swagger UI:** [https://mlops-api-1041024007691.us-central1.run.app/docs](https://mlops-api-1041024007691.us-central1.run.app/docs)
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Health check to verify the API and model are loaded. |
+| `POST` | `/predict` | Upload an image to receive emotion classification and confidence score. |
+
+### Example Usage (Python)
+```python
+import requests
+
+url = "[https://mlops-api-1041024007691.us-central1.run.app/predict](https://mlops-api-1041024007691.us-central1.run.app/predict)"
+files = {'file': open('sample_image.jpg', 'rb')}
+response = requests.post(url, files=files)
+
+print(response.json())
+# Output: {"emotion": "happy", "confidence": 0.982}))
+
