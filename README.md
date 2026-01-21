@@ -158,3 +158,11 @@ To evaluate the reliability of the Emotion Classification API, a load test was p
 - **Efficiency:** The average response time of **278ms** for a PyTorch-based inference on CPU-only infrastructure is well within acceptable bounds for real-time applications.
 - **Reliability:** Despite reaching 4.0 Requests Per Second (RPS), the system maintained a **0% failure rate**, confirming that the 2Gi RAM and 1 vCPU allocation on Cloud Run is sufficient for the current model architecture.
 
+
+## CI/CD & Automation
+
+This project uses **GitHub Actions** to ensure code quality and system reliability:
+* **Automated Testing:** Every push triggers a test suite using `pytest`, covering data loading, model architecture, and API endpoints.
+* **Mocking for Efficiency:** The CI pipeline utilizes unit test mocking to simulate model inference, allowing for rapid testing without large binary dependencies.
+* **Dependency Management:** Automated version checks via `dependabot` to keep the environment secure and up-to-date.
+
