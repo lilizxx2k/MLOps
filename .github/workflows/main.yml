@@ -32,15 +32,19 @@ jobs:
             pip install -r requirements.txt
           fi
 
-
       - name: Run Integration Tests
         env:
           KAGGLE_USERNAME: "dummy"
           KAGGLE_KEY: "dummy"
         run: |
-          # Create a dummy model directory and file so the API doesn't crash
+          # Create dummy directories and files in all possible expected locations
+          mkdir -p models
           mkdir -p MLOps/models
+          touch models/TrainedModel.pth
           touch MLOps/models/TrainedModel.pth
+          
+          # Ensure dummy data folders exist for the dataset test
+          mkdir -p data/raw
           
           export PYTHONPATH=$PYTHONPATH:$(pwd)/MLOps/src
           pytest MLOps/tests/
