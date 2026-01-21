@@ -22,10 +22,16 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Torch CPU keeps the runner fast and prevents memory crashes
-          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-          pip install -r requirements.txt
-          pip install pytest httpx
+          # Explicitly install the requirements file found in the root
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # Install test dependencies just in case they are missing
+          pip install pytest httpx torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Run Integration Tests
+        run: |
+          # This adds the directory containing 'mlops' to the path
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/src
+          pytest tests/
 
       - name: Run Integration Tests
         run: |
