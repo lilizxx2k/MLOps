@@ -19,13 +19,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Install Torch CPU version
           pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
           
-          # Install the missing pieces explicitly
-          pip install loguru kaggle pytest httpx fastapi python-multipart pillow evidently pandas
+          # Force Pydantic v1 and Evidently to avoid the ModelMetaclass error
+          pip install "pydantic<2.0" "evidently==0.4.15" pandas scikit-learn
           
-          # Try to install the rest from requirements.txt
+          # Install other requirements
+          pip install loguru kaggle pytest httpx fastapi python-multipart pillow
+          
           if [ -f MLOps/requirements.txt ]; then 
             pip install -r MLOps/requirements.txt
           elif [ -f requirements.txt ]; then
