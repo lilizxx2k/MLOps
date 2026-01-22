@@ -1,3 +1,18 @@
+import sys
+
+# Patching Pydantic before Evidently imports anything
+try:
+    import pydantic
+    if pydantic.VERSION.startswith('1.'):
+        from pydantic.main import ModelMetaclass
+    else:
+        from pydantic.v1.main import ModelMetaclass
+except ImportError:
+    # If the import above fails, we force the mapping
+    from pydantic._internal._model_construction import ModelMetaclass
+    sys.modules['pydantic.v1.main'] = sys.modules.get('pydantic.v1.main', type(sys)('pydantic.v1.main'))
+    setattr(sys.modules['pydantic.v1.main'], 'ModelMetaclass', ModelMetaclass)
+
 import pandas as pd
 from evidently.report import Report
 from evidently.metric_preset import DataDriftPreset, DataQualityPreset, TargetDriftPreset
