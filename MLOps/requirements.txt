@@ -13,5 +13,5 @@ dvc
 dvc-gs
 pytest
 httpx
-evidently 
+evidently==0.4.15
 scikit-learn
