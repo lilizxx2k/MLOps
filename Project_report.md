@@ -122,8 +122,8 @@ will check the repositories and the code to verify your answers.
 > **Enter the group number you signed up on <learn.inside.dtu.dk>**
 >
 > Answer:
-
-Group 32
+> 
+> Group 32
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -157,10 +157,10 @@ Group 32
 > **through to get an exact copy of your environment.**
 >
 > Answer:
+> 
+> We managed dependencies using Conda for the base environment > and pip for project/package dependencies. The repository contains an environment.yml that pins the Python version and creates a reproducible Conda environment, and a requirements.txt (plus requirements_dev.txt) that pins the Python packages needed to run the project (and extra developer tools such as formatting/testing). The project itself is installed as an editable package (pip install -e .) using the pyproject.toml, so imports work consistently and changes to src/mlops are picked up immediately.
 
-We managed dependencies using Conda for the base environment and pip for project/package dependencies. The repository contains an environment.yml that pins the Python version and creates a reproducible Conda environment, and a requirements.txt (plus requirements_dev.txt) that pins the Python packages needed to run the project (and extra developer tools such as formatting/testing). The project itself is installed as an editable package (pip install -e .) using the pyproject.toml, so imports work consistently and changes to src/mlops are picked up immediately.
-
-To get an exact copy of the environment, a new team member would:
+> To get an exact copy of the environment, a new team member would:
 
 Create and activate the Conda environment:
 conda env create -f environment.yml
