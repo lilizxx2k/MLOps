@@ -23,7 +23,7 @@ jobs:
           pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
           
           # Install the missing pieces explicitly
-          pip install loguru kaggle pytest httpx fastapi python-multipart pillow
+          pip install loguru kaggle pytest httpx fastapi python-multipart pillow evidently pandas
           
           # Try to install the rest from requirements.txt
           if [ -f MLOps/requirements.txt ]; then 
@@ -48,11 +48,14 @@ jobs:
           
           export PYTHONPATH=$PYTHONPATH:$(pwd)/MLOps/src
           pytest MLOps/tests/
-       - name: Run Monitoring Test
-         run: |
-           # Create dummy data to verify the report generation works in CI
-           python -c "import pandas as pd; \
-           df = pd.DataFrame({'text': ['happy'], 'label': [1]}); \
-           df.to_csv('data/processed/train.csv', index=False); \
-           df.to_csv('data/processed/latest_logs.csv', index=False)"
-           python MLOps/monitoring.py
+
+      - name: Run Monitoring Test
+        run: |
+          # Ensure directory exists for dummy data
+          mkdir -p data/processed
+          # Create dummy data to verify the report generation works in CI
+          python -c "import pandas as pd; \
+          df = pd.DataFrame({'text': ['happy'], 'label': [1]}); \
+          df.to_csv('data/processed/train.csv', index=False); \
+          df.to_csv('data/processed/latest_logs.csv', index=False)"
+          python MLOps/monitoring.py
