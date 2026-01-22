@@ -9,10 +9,11 @@ kaggle>=1.7.0
 wandb
 dvc
 dvc-gs
-pytest
-httpx
 pandas
 scikit-learn
-pydantic==1.10.15
-fastapi==0.103.2
-evidently==0.4.15
+
+fastapi>=0.115.0
+pydantic>=2.0.0
+pytest>=8.0.0
+httpx>=0.28.0
+starlette>=0.40.0
