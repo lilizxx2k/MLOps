@@ -335,7 +335,9 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 15 fill here ---
+We used Docker in our project to make sure that our environment was the same every time we ran the application. This meant that whether we were working on our computers or using Google Cloud everything worked exactly the same way.We put our application in a container so that it had its version of Python, PyTorch and other libraries it needed. This kept these dependencies separate from the rest of the system, which made it easier to run tests and experiments.
+
+Docker made it easier to run our experiments both on our local computers and, in Google Cloud Build without having to worry about problems caused by the environment. We used Docker to keep our Docker environment consistent which helped us to use Docker in a way.We created a single Docker image that installs all required dependencies from requirements.txt, copies the project source code, and runs a defined entry point for validating the dataset and executing a model forward pass. This image was used locally for testing and in the CI/CD pipeline to automatically build and push the image to Artifact Registry.https://github.com/lilizxx2k/MLOps-Emotion-Classification/blob/main/Dockerfile
 
 ### Question 16
 
@@ -395,8 +397,18 @@ will check the repositories and the code to verify your answers.
 > **stored. You can take inspiration from [this figure](figures/registry.png).**
 >
 > Answer:
+We used Google Cloud Artifact Registry to store Docker images built as part of our CI/CD pipeline.
+A Docker repository named `mlops-repo` was created in the `europe-west1` region.
 
---- question 20 fill here ---
+The repository contains multiple Docker images, including `emotion-mlops` and `mlops_project`,
+which were automatically built and pushed using Google Cloud Build. These images contain the
+complete runtime environment, dependencies, and source code required to run the project.
+
+The figures below show the Artifact Registry repository and the Docker images stored within it.
+![Artifact Registry Repository](reports/figures/artifact_registry_repo.png)
+
+![Docker Images in Artifact Registry](reports/figures/artifact_registry_images.png)
+
 
 ### Question 21
 
@@ -483,7 +495,11 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 26 fill here ---
+We did not implement monitoring of a deployed model in this project. The main focus of the project was on containerization, reproducibility, and automated building of Docker images rather than deployment and production monitoring.
+
+If monitoring were implemented, it would significantly improve the longevity and reliability of the application. Monitoring would allow tracking of model performance over time and help detect issues such as data drift, where incoming data differs from the training data distribution, and performance degradation, where model predictions become less accurate. Additionally, system-level monitoring of metrics such as latency, memory usage, and error rates would help ensure stable operation of the application.
+
+By combining monitoring with logging and alerting, potential problems could be identified early, enabling timely retraining or redeployment of the model and reducing the risk of incorrect predictions affecting users.
 
 ## Overall discussion of project
 
@@ -534,8 +550,23 @@ will check the repositories and the code to verify your answers.
 > *Whenever we commit code and push to GitHub, it auto triggers ... and ... . From there the diagram shows ...*
 >
 > Answer:
+![Overall system architecture](reports/figures/architecture_overview.png)
+The figure illustrates the overall machine learning operations architecture used in the project.
+Development and experimentation are performed locally, where data handling, model training, and
+hyperparameter configuration are implemented using PyTorch, Hydra, and Weights & Biases.
 
---- question 29 fill here ---
+The source code is version-controlled using GitHub. When changes are pushed to the repository,
+continuous integration pipelines are triggered using GitHub Actions and Google Cloud Build.
+These pipelines are responsible for running tests and building Docker images.
+
+The Docker image contains the full runtime environment and project code and is pushed to Google
+Cloud Artifact Registry, where it is stored and versioned. The image can then be pulled and executed
+to reproduce experiments in a consistent environment.
+
+Deployment and online serving of the model were not implemented in this project and are shown
+only as a future extension of the architecture.
+
+
 
 ### Question 30
 
