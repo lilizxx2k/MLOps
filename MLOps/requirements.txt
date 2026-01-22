@@ -14,3 +14,4 @@ dvc-gs
 pytest
 httpx
 evidently 
+scikit-learn
