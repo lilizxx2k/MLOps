@@ -32,8 +32,7 @@ idna==3.11
 iniconfig==2.3.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
-kaggle==1.8.3
-kagglesdk==0.1.14
+kaggle>=1.7.0
 librt==0.7.7
 lightning-utilities==0.15.2
 locust==2.43.1
@@ -105,4 +104,3 @@ yarl==1.22.0
 zope.event==6.1
 zope.interface==8.2
 loguru
-kaggle
