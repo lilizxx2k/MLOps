@@ -3,31 +3,42 @@ from fastapi.testclient import TestClient
 from io import BytesIO
 from PIL import Image
 from mlops.api import app
+from unittest.mock import patch
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def mock_model_load_strict():
+    with patch("torch.load") as mocked_load:
+        mocked_load.return_value = {"dummy_key": None}
+        with patch("torch.nn.Module.load_state_dict") as mocked_sd:
+            mocked_sd.return_value = None
+            yield
 
 def test_health_check():
-    """M24: Testing functionality of health endpoint"""
+    """Testing functionality of health endpoint"""
     with TestClient(app) as client:
         response = client.get("/health")
         assert response.status_code == 200
         assert response.json() == {"status": "ok"}
 
 def test_prediction():
-    """M24: Testing integration of model inference with a dummy image"""
+    """Testing integration of model inference with a dummy image"""
     with TestClient(app) as client:
-        # 1. Create a dummy image in memory
+        # Create a dummy image in memory
         file_name = "test_image.jpg"
         image = Image.new("RGB", (224, 224), color="red")
         img_byte_arr = BytesIO()
         image.save(img_byte_arr, format='JPEG')
         img_byte_arr.seek(0)
 
-        # 2. Post to the /predict endpoint
+        # Post to the /predict endpoint
         response = client.post(
             "/predict",
             files={"file": (file_name, img_byte_arr, "image/jpeg")}
         )
 
-        # 3. Assertions
+        # Assertions
         assert response.status_code == 200
         data = response.json()
         assert "emotion" in data
