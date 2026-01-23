@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from model import Model
-from train import train, evaluate
+from mlops.model import Model
+from mlops.train import train, evaluate
 
 
 def test_single_training_step():
