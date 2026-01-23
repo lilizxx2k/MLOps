@@ -368,8 +368,11 @@ Docker made it easier to run our experiments both on our local computers and, in
 > *We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...*
 >
 > Answer:
+We used a lot of Google Cloud Platform services in our project. These Google Cloud Platform services helped us with storing data and automating things. We also used Google Cloud Platform services to make our workflows work in containers. This made our project run smoothly with the help of Google Cloud Platform.We used Google Cloud Storage for our data because it can handle a lot of information. Google Cloud Storage was really good for storing files.
 
---- question 17 fill here ---
+We also used it with Data Version Control so that our big data files were stored else but we could still keep track of the different versions of these files, in Git. This way Google Cloud Storage and Data Version Control worked together to help us manage our data.I used Google Cloud Build to automate making Docker images. This means that every time I made changes and pushed them to my GitHub repository the Docker images were made automatically. This is really helpful because it lets me do integration with Google Cloud Build and Docker images. I set up build triggers so that Google Cloud Build would make the Docker images, for me.
+We used Google Artifact Registry to store and manage the Docker images that Cloud Build produced. This way we could keep the Docker images in one place, which made it easier to use them again and again. We were able to keep versions of the Docker images, which was really helpful. Google Artifact Registry was like a spot, in the cloud where we could store all of our Docker images.
+
 
 ### Question 18
 
@@ -384,7 +387,7 @@ Docker made it easier to run our experiments both on our local computers and, in
 >
 > Answer:
 
---- question 18 fill here ---
+Google Compute Engine is the underlying infrastructure for many managed services in Google Cloud Platform. In our project, we did not manually create or manage virtual machines ourselves. Instead, we made use of Compute Engine indirectly through managed GCP services, primarily Google Cloud Build.Google Compute Engine is the underlying infrastructure for many managed services in Google Cloud Platform. In our project, we did not manually create or manage virtual machines ourselves. Instead, we made use of Compute Engine indirectly through managed GCP services, primarily Google Cloud Build.When Cloud Build was triggered, Google automatically provisioned short-lived virtual machines based on Compute Engine to execute the steps defined in our cloudbuild.yaml. These virtual machines pulled the source code, built Docker images according to the Dockerfile, and pushed the images to Google Artifact Registry.
 
 ### Question 19
 
@@ -393,7 +396,10 @@ Docker made it easier to run our experiments both on our local computers and, in
 >
 > Answer:
 
---- question 19 fill here ---
+![GCP bucket overview](figures/bucket.png)
+
+
+
 
 ### Question 20
 
@@ -421,7 +427,10 @@ The figures below show the Artifact Registry repository and the Docker images st
 >
 > Answer:
 
---- question 21 fill here ---
+![Cloud build overview](figures/build.png)
+
+
+
 
 ### Question 22
 
@@ -436,7 +445,6 @@ The figures below show the Artifact Registry repository and the Docker images st
 >
 > Answer:
 
---- question 22 fill here ---
 
 ## Deployment
 
@@ -601,5 +609,6 @@ only as a future extension of the architecture.
 > *All members contributed to code by...*
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
+Student s25131@dtu.dk
+ was responsible for the cloud and containerization aspects of the project. This included constructing one or more Dockerfiles for the codebase, building the Docker images locally, and verifying that they worked as intended (M10). The student also set up Google Cloud Storage for data storage and linked it with the project’s data handling workflow (M21). In addition,  configured Google Cloud Build triggers to automatically build Docker images when changes were pushed to the repository (M21) and prepared the infrastructure for running model training in GCP using Compute Engine or Vertex AI.
 
---- question 31 fill here ---
