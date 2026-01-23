@@ -27,8 +27,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r MLOps/requirements.txt
         pip install -r MLOps/requirements_dev.txt
+        pip install -e ./src
         pip list
 
     - name: Test with pytest
       run: |
-        pytest -v
+        python -m pytest -v
